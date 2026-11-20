@@ -25,7 +25,7 @@ Notum:
 
 ## 3. Catalog modülü
 
-**Aggregate root: Product.** Renkler, varyantlar, görseller ve özellikler Product olmadan anlamsız olduğu için Product'ın içindedir ve sadece Product üzerinden değiştirilir.
+**Aggregate root: Product.** Varyantlar, görseller ve özellikler Product olmadan anlamsız olduğu için Product'ın içindedir ve sadece Product üzerinden değiştirilir.
 
 ### Category
 - Id: Guid
@@ -206,7 +206,7 @@ Notum:
 | Nereden | Nereye | Ne zaman |
 | --- | --- | --- |
 | PendingPayment | Paid | Ödeme başarılı |
-| PendingPayment | Cancelled | Ödeme başarısız, süre doldu veya kullanıcı vazgeçti |
+| PendingPayment | Cancelled | Rezervasyon süresi doldu veya kullanıcı vazgeçti |
 | Paid | Shipped | Depodan çıktı |
 | Paid | Cancelled | Kargoya verilmeden iptal (iade gerekir, sonraki aşamada) |
 | Shipped | Delivered | Teslim edildi |
@@ -226,7 +226,8 @@ Notum:
 3. Ordering, Inventory'den tüm kalemler için rezervasyon ister (örneğin 15 dakika süreli). Stok yetersizse sipariş iptal edilir.
 4. Payment, bir ödeme kaydı açar, sağlayıcıyı çağırır ve 3D Secure adımını yürütür.
 5. Ödeme başarılıysa `PaymentSucceeded` event'i yayınlanır: Ordering siparişi `Paid` yapar, Inventory rezervasyonu kalıcılaştırır (stok düşer), Basket temizlenir.
-6. Ödeme başarısız olursa veya süre dolarsa: Ordering siparişi `Cancelled` yapar, Inventory rezervasyonu serbest bırakır.
+6. Ödeme denemesi başarısız olursa: Payment kaydı `Failed` olur, sipariş `PendingPayment`'ta kalır ve kullanıcı rezervasyon süresi dolana kadar başka bir kartla tekrar deneyebilir (yeni bir Payment kaydı açılır).
+7. Rezervasyon süresi dolarsa veya kullanıcı vazgeçerse: Ordering siparişi `Cancelled` yapar, Inventory rezervasyonu serbest bırakır.
 
 Stok düşme zamanı: sepete eklemede değil, rezervasyon anında "ayrılır", ödeme başarılı olunca kalıcı olarak düşer.
 
@@ -267,5 +268,4 @@ Notum:
 **Açık soru**
 - [ ] Ödeme başarılı oldu ama Ordering siparişi `Paid` yapamadan uygulama çöktü: ne olur? Bu riski fark ettim ama çözümünü henüz bilmiyorum. Mesajlaşma aşamasında (outbox pattern) öğrenilip bu bölüme geri dönülecek.
 
-## 14. Genel notlarım
 
