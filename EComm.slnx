@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EComm.Api/EComm.Api.csproj" />
+    <Project Path="src/EComm.Shared/EComm.Shared.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src/Modules/EComm.Basket/EComm.Basket.csproj" />
+    <Project Path="src/Modules/EComm.Catalog/EComm.Catalog.csproj" />
+    <Project Path="src/Modules/EComm.Inventory/EComm.Inventory.csproj" />
+    <Project Path="src/Modules/EComm.Ordering/EComm.Ordering.csproj" />
+    <Project Path="src/Modules/EComm.Payment/EComm.Payment.csproj" />
+  </Folder>
+</Solution>
