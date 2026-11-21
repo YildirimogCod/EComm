@@ -1,15 +1,24 @@
+using EComm.Basket;
+using EComm.Catalog;
+using EComm.Inventory;
+using EComm.Ordering;
+using EComm.Payment;
+
 using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddBasketModule();
+builder.Services.AddCatalogModule();
+builder.Services.AddInventoryModule();
+builder.Services.AddOrderingModule();
+builder.Services.AddPaymentModule();
 
 var app = builder.Build();
 
 
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
