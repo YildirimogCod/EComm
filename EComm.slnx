@@ -10,4 +10,7 @@
     <Project Path="src/Modules/EComm.Ordering/EComm.Ordering.csproj" />
     <Project Path="src/Modules/EComm.Payment/EComm.Payment.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EComm.Shared.Tests/EComm.Shared.Tests.csproj" />
+  </Folder>
 </Solution>
