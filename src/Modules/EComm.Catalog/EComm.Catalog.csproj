@@ -4,4 +4,12 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\EComm.Shared\EComm.Shared.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="EComm.Catalog.Tests" />
+  </ItemGroup>
+
 </Project>
